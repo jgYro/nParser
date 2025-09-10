@@ -14,11 +14,17 @@ fn main() {
                 println!("Subject: {}", cert_info.subject);
                 println!("Issuer: {}", cert_info.issuer);
                 println!("Serial Number: {}", cert_info.serial_number);
-                println!("Signature Algorithm: {}", cert_info.signature_algorithm);
+                println!(
+                    "Signature Algorithm: {}",
+                    cert_info.signature_algorithm_description
+                );
                 if let Some(ref params) = cert_info.signature_params {
                     println!("Signature Parameters: {}", params);
                 }
-                println!("Public Key Algorithm: {}", cert_info.public_key_algorithm);
+                println!(
+                    "Public Key Algorithm: {}",
+                    cert_info.public_key_algorithm_description
+                );
                 if let Some(size) = cert_info.public_key_size {
                     println!("Public Key Size: {} bits", size);
                 }
@@ -35,6 +41,14 @@ fn main() {
                         "Extended Key Usage: {}",
                         cert_info.extended_key_usage.join(", ")
                     );
+                }
+
+                if !cert_info.extensions.is_empty() {
+                    println!("Extensions:");
+                    for ext in &cert_info.extensions {
+                        let critical_marker = if ext.critical { " (CRITICAL)" } else { "" };
+                        println!("  - {}{}", ext.oid_description, critical_marker);
+                    }
                 }
 
                 println!();
