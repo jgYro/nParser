@@ -1,0 +1,7 @@
+[package]
+name = "pem_processor"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+x509-parser = "0.16.0"
