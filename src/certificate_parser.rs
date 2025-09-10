@@ -18,7 +18,7 @@ fn format_oid_with_description(oid: &der_parser::oid::Oid, registry: &OidRegistr
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct CertificateInfo {
     pub subject: String,
     pub issuer: String,
@@ -37,7 +37,7 @@ pub struct CertificateInfo {
     pub extensions: Vec<ExtensionInfo>,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ExtensionInfo {
     pub oid: String,
     pub oid_description: String,
