@@ -78,6 +78,7 @@ fn calculate_sha256_fingerprint(der_data: &[u8]) -> String {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct CertificateInfo {
     // Core certificate fields
     pub version: i32,
@@ -155,6 +156,7 @@ pub struct CertificateInfo {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct ExtensionInfo {
     pub oid: String,
     pub oid_description: String,
@@ -163,12 +165,14 @@ pub struct ExtensionInfo {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct SubjectAlternativeName {
     pub name_type: String,
     pub value: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct AuthorityKeyIdentifier {
     pub key_identifier: Option<String>,
     pub authority_cert_issuer: Option<Vec<String>>,
@@ -176,42 +180,49 @@ pub struct AuthorityKeyIdentifier {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct AuthorityInfoAccess {
     pub access_method: String,
     pub access_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct SubjectInfoAccess {
     pub access_method: String,
     pub access_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct CertificatePolicy {
     pub policy_identifier: String,
     pub policy_qualifiers: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct PolicyMapping {
     pub issuer_domain_policy: String,
     pub subject_domain_policy: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct PolicyConstraints {
     pub require_explicit_policy: Option<u32>,
     pub inhibit_policy_mapping: Option<u32>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct NameConstraints {
     pub permitted_subtrees: Option<Vec<String>>,
     pub excluded_subtrees: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct SignedCertificateTimestamp {
     pub version: u8,
     pub log_id: String,

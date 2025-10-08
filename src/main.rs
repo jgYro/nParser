@@ -1,4 +1,4 @@
-use pem_processor::parse_certificates_from_pem;
+use nparser::parse_certificates_from_pem;
 
 fn main() {
     let path =

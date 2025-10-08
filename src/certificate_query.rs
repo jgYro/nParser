@@ -7,6 +7,7 @@ use std::collections::HashSet;
 /// Only specified (non-None) fields are used for filtering. All specified conditions
 /// must be true for a certificate to match.
 #[derive(Debug, Clone, Default, PartialEq)]
+#[cfg_attr(feature = "serialization", derive(serde::Serialize, serde::Deserialize))]
 pub struct CertificateQuery {
     /// Match certificates where public key algorithm description contains ANY of these substrings (case-insensitive)
     pub public_key_algorithm_contains: Option<Vec<String>>,

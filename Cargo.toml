@@ -1,10 +1,70 @@
 [package]
-name = "pem_processor"
-version = "0.1.0"
-edition = "2024"
+name = "nparser"
+version = "0.2.0"
+edition = "2021"
+authors = ["jgYro"]
+description = "A comprehensive X.509 certificate parsing library that extracts all certificate fields with explicit null handling"
+documentation = "https://docs.rs/nparser"
+repository = "https://github.com/jgYro/nParser"
+homepage = "https://github.com/jgYro/nParser"
+license = "MIT OR Apache-2.0"
+keywords = ["x509", "certificate", "pem", "parser", "cryptography"]
+categories = ["cryptography", "parser-implementations", "encoding"]
+readme = "README.md"
 
 [dependencies]
 x509-parser = "0.16.0"
 oid-registry = { version = "0.8.0", features = ["crypto", "x509"] }
 ring = "0.17"
 hex = "0.4"
+serde = { version = "1.0", features = ["derive"], optional = true }
+serde_json = { version = "1.0", optional = true }
+
+# Optional dependencies for additional features
+chrono = { version = "0.4", optional = true }
+
+[dev-dependencies]
+tempfile = "3.8"
+assert_matches = "1.5"
+
+[features]
+default = []
+# Enable serialization/deserialization support
+serialization = ["serde", "serde_json"]
+# Enable date/time validation features
+date-validation = ["chrono"]
+# Enable all features
+full = ["serialization", "date-validation"]
+
+[[bin]]
+name = "cert-analyzer"
+path = "src/main.rs"
+required-features = []
+
+[lib]
+name = "nparser"
+path = "src/lib.rs"
+
+# Examples that demonstrate library usage
+[[example]]
+name = "basic_parsing"
+path = "examples/basic_parsing.rs"
+
+[[example]]
+name = "certificate_filtering"
+path = "examples/certificate_filtering.rs"
+
+[[example]]
+name = "chain_validation"
+path = "examples/chain_validation.rs"
+required-features = ["date-validation"]
+
+[[example]]
+name = "serialization"
+path = "examples/serialization.rs"
+required-features = ["serialization"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
