@@ -6,3 +6,5 @@ edition = "2024"
 [dependencies]
 x509-parser = "0.16.0"
 oid-registry = { version = "0.8.0", features = ["crypto", "x509"] }
+ring = "0.17"
+hex = "0.4"
